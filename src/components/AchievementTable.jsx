@@ -1,6 +1,10 @@
 import { getRaw, getFinal, bandClass, multClass } from '../utils/scoring';
 import { METRIC_HEADERS } from '../data/constants';
 
+// Rings, Awards → Championships (gold)
+// Stats, Alpha, Playoffs, Clutch → Performance (blue)
+// Defense, Versatility, Longevity → Legacy (green)
+
 function ScoreCell({ value, onDecrement, onIncrement }) {
   return (
     <div className="score-cell">
@@ -26,38 +30,40 @@ export default function AchievementTable({ players, onAdjScore, onAdjMult }) {
     <>
       <div className="legend">
         <div className="legend-item">
-          <div className="legend-dot" style={{ background: 'var(--r1)' }} />
-          1–3 weak
+          <div className="legend-dot" style={{ background: 'var(--r1)' }} />1–3 weak
         </div>
         <div className="legend-item">
-          <div className="legend-dot" style={{ background: 'var(--r2)' }} />
-          4–5 below avg
+          <div className="legend-dot" style={{ background: 'var(--r2)' }} />4–5 below avg
         </div>
         <div className="legend-item">
-          <div className="legend-dot" style={{ background: 'var(--r3)' }} />
-          6 average
+          <div className="legend-dot" style={{ background: 'var(--r3)' }} />6 average
         </div>
         <div className="legend-item">
-          <div className="legend-dot" style={{ background: 'var(--r4)' }} />
-          7–8 strong
+          <div className="legend-dot" style={{ background: 'var(--r4)' }} />7–8 strong
         </div>
         <div className="legend-item">
-          <div className="legend-dot" style={{ background: 'var(--r5)' }} />
-          9–10 elite
+          <div className="legend-dot" style={{ background: 'var(--r5)' }} />9–10 elite
         </div>
       </div>
 
-      <div className="table-wrap" style={{ marginTop: '10px' }}>
+      <div className="table-wrap">
         <table>
           <thead>
+            {/* Column group row */}
             <tr>
-              <th className="col-name">Player</th>
+              <th className="col-name" rowSpan={2}>Player</th>
+              <th colSpan={2} className="col-group col-group--gold">Championships</th>
+              <th colSpan={4} className="col-group col-group--blue">Performance</th>
+              <th colSpan={3} className="col-group col-group--green">Legacy</th>
+              <th className="col-mult" rowSpan={2} title="Context multiplier — adjusts raw score">Mult.</th>
+              <th className="col-raw" rowSpan={2}>Raw</th>
+              <th className="col-fin" rowSpan={2}>Final</th>
+            </tr>
+            {/* Metric header row */}
+            <tr>
               {METRIC_HEADERS.map((m) => (
                 <th key={m.key} title={m.title}>{m.label}</th>
               ))}
-              <th className="col-mult" title="Context multiplier — adjusts raw score">Mult.</th>
-              <th className="col-raw">Raw</th>
-              <th className="col-fin">Final</th>
             </tr>
           </thead>
           <tbody>

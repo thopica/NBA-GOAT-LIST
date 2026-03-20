@@ -11,9 +11,8 @@
   --text2: #1e293b;
   --muted: #64748b;
   --muted2: #94a3b8;
-  --accent: #0ea5e9;
 
-  /* Score band colors — on white, these read cleanly */
+  /* Score band colors */
   --r1: #dc2626;
   --r1b: #fef2f2;
   --r2: #c2410c;
@@ -53,14 +52,14 @@ body {
 /* ── Header ── */
 
 header {
-  padding: 28px 40px 0;
+  padding: 20px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
   border-bottom: 1px solid var(--border);
-  padding-bottom: 20px;
+  background: var(--bg);
 }
 
 .logo {
@@ -86,7 +85,7 @@ header {
 }
 
 .logo-title {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--text);
   letter-spacing: -0.3px;
@@ -95,7 +94,6 @@ header {
 .logo-sub {
   font-size: 11px;
   color: var(--muted);
-  letter-spacing: 0.3px;
   margin-top: 1px;
 }
 
@@ -106,44 +104,185 @@ header {
   border: 1px solid var(--border);
   border-radius: 6px;
   padding: 4px 10px;
-  letter-spacing: 0.2px;
 }
 
-/* ── Section labels ── */
+/* ── Section headers ── */
 
-.section-label {
+.section-header {
+  position: relative;
+  padding: 18px 40px;
+  background: var(--section-bg, var(--bg2));
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-top: 28px;
+}
+
+.section-header::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -1px;
+  bottom: -1px;
+  width: 4px;
+  background: var(--section-accent, var(--muted2));
+}
+
+.section-header--amber {
+  --section-accent: #f59e0b;
+  --section-bg: #fffbeb;
+}
+
+.section-header--blue {
+  --section-accent: #3b82f6;
+  --section-bg: #eff6ff;
+}
+
+.section-header--violet {
+  --section-accent: #8b5cf6;
+  --section-bg: #f5f3ff;
+}
+
+.section-header--green {
+  --section-accent: #10b981;
+  --section-bg: #f0fdf4;
+}
+
+.section-header-inner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.section-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--section-accent, var(--muted2));
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.section-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.section-desc {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.section-badge {
+  margin-left: auto;
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
   color: var(--muted);
-  padding: 28px 40px 12px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--border2);
+  border-radius: 99px;
+  padding: 3px 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-.divider {
-  height: 1px;
-  background: var(--border);
-  margin: 16px 0 0;
+/* ── Section body ── */
+
+.section-body {
+  padding-top: 20px;
+  padding-bottom: 32px;
 }
 
 /* ── Live Ranking ── */
 
+.ranking-wrap {
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Hero card — rank #1 */
+.rank-hero {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  border-radius: 10px;
+}
+
+.rank-hero .rank-num {
+  font-size: 34px;
+  font-weight: 800;
+  color: #d97706;
+  width: 40px;
+  text-align: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.rank-hero .rank-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.rank-hero .rank-hero-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #d97706;
+  margin-top: 1px;
+}
+
+.rank-hero .rank-bar-wrap {
+  height: 5px;
+  margin-top: 8px;
+}
+
+.rank-hero .rank-bar {
+  background: #fbbf24;
+}
+
+.rank-hero .rank-score {
+  font-size: 26px;
+  font-weight: 800;
+  color: #92400e;
+  letter-spacing: -0.5px;
+  flex-shrink: 0;
+}
+
+/* Grid — ranks 2–12 */
 .ranking-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 8px;
-  padding: 0 40px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 6px;
 }
 
 .rank-card {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 12px 16px;
+  padding: 11px 14px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  transition: background 0.15s, border-color 0.15s;
+  gap: 10px;
+  transition: background 0.12s, border-color 0.12s;
 }
 
 .rank-card:hover {
@@ -151,23 +290,14 @@ header {
   border-color: var(--border2);
 }
 
-.rank-card.rank-1 {
-  border-color: var(--border2);
-  background: #fffbeb;
-}
-
 .rank-num {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 800;
   color: var(--muted2);
-  width: 28px;
+  width: 26px;
   text-align: center;
   flex-shrink: 0;
   line-height: 1;
-}
-
-.rank-card.rank-1 .rank-num {
-  color: #d97706;
 }
 
 .rank-info {
@@ -196,12 +326,8 @@ header {
   transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.rank-card.rank-1 .rank-bar {
-  background: #fbbf24;
-}
-
 .rank-score {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--text2);
   flex-shrink: 0;
@@ -219,20 +345,50 @@ header {
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 820px;
+  min-width: 840px;
 }
 
-thead tr {
+/* Column group header row */
+.col-group {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 6px 6px 5px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.col-group--gold {
+  background: #fffbeb;
+  color: #92400e;
+  border-bottom: 2px solid #f59e0b;
+}
+
+.col-group--blue {
+  background: #eff6ff;
+  color: #1e40af;
+  border-bottom: 2px solid #3b82f6;
+}
+
+.col-group--green {
+  background: #f0fdf4;
+  color: #14532d;
+  border-bottom: 2px solid #10b981;
+}
+
+/* Metric header row */
+thead tr:last-child {
   border-bottom: 2px solid var(--border);
 }
 
 th {
   font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
   color: var(--muted);
-  padding: 8px 6px 10px;
+  padding: 7px 6px 8px;
   text-align: center;
   background: var(--bg);
 }
@@ -241,11 +397,23 @@ th.col-name {
   text-align: left;
   padding-left: 0;
   width: 90px;
+  vertical-align: bottom;
 }
 
-th.col-mult { width: 76px; }
-th.col-raw  { width: 48px; }
-th.col-fin  { width: 58px; }
+th.col-mult {
+  width: 76px;
+  vertical-align: bottom;
+}
+
+th.col-raw {
+  width: 48px;
+  vertical-align: bottom;
+}
+
+th.col-fin {
+  width: 58px;
+  vertical-align: bottom;
+}
 
 th[title] { cursor: help; }
 
@@ -311,30 +479,19 @@ td.col-fin {
   cursor: pointer;
   font-size: 13px;
   line-height: 1;
-  padding: 2px 2px;
+  padding: 2px;
   border-radius: 3px;
   transition: color 0.12s;
 }
 
-.adj-btn:hover {
-  color: var(--text);
-}
+.adj-btn:hover { color: var(--text); }
 
-/* Score band colors — softer on white */
-.band-1,
-.band-2,
-.band-3 { background: var(--r1b); color: var(--r1); }
-
-.band-4,
-.band-5 { background: var(--r2b); color: var(--r2); }
-
-.band-6 { background: var(--r3b); color: var(--r3); }
-
-.band-7,
-.band-8 { background: var(--r4b); color: var(--r4); }
-
-.band-9,
-.band-10 { background: var(--r5b); color: var(--r5); }
+/* Score band colors */
+.band-1, .band-2, .band-3 { background: var(--r1b); color: var(--r1); }
+.band-4, .band-5           { background: var(--r2b); color: var(--r2); }
+.band-6                    { background: var(--r3b); color: var(--r3); }
+.band-7, .band-8           { background: var(--r4b); color: var(--r4); }
+.band-9, .band-10          { background: var(--r5b); color: var(--r5); }
 
 /* ── Multiplier cells ── */
 
@@ -363,7 +520,7 @@ td.col-fin {
 .legend {
   display: flex;
   gap: 16px;
-  padding: 0 40px 4px;
+  padding: 0 40px 12px;
   flex-wrap: wrap;
   align-items: center;
 }
@@ -382,7 +539,81 @@ td.col-fin {
   border-radius: 2px;
 }
 
+/* ── Formula strip ── */
+
+.formula-strip {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 0 40px 20px;
+  flex-wrap: wrap;
+}
+
+.formula-token {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 20px 10px;
+  min-width: 90px;
+}
+
+.formula-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--muted);
+}
+
+.formula-value {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.formula-op {
+  font-size: 20px;
+  color: var(--muted2);
+  font-weight: 300;
+  padding-bottom: 10px;
+}
+
+.formula-token--result {
+  border-color: #c4b5fd;
+  background: #f5f3ff;
+}
+
+.formula-token--result .formula-value {
+  color: #7c3aed;
+}
+
+.formula-note {
+  font-size: 11px;
+  color: var(--muted2);
+  padding-bottom: 12px;
+  font-style: italic;
+  align-self: flex-end;
+}
+
 /* ── Context multipliers ── */
+
+.ctx-legend {
+  display: flex;
+  gap: 16px;
+  padding: 0 40px 16px;
+  flex-wrap: wrap;
+}
+
+.ctx-legend-item {
+  font-size: 11px;
+  color: var(--muted);
+}
 
 .context-grid {
   display: grid;
@@ -423,9 +654,7 @@ td.col-fin {
   border-bottom: 1px solid var(--border);
 }
 
-.ctx-row:last-child {
-  border: none;
-}
+.ctx-row:last-child { border: none; }
 
 .ctx-label {
   font-size: 11px;
@@ -469,21 +698,6 @@ td.col-fin {
   background: var(--bg2);
 }
 
-/* ── Formula note ── */
-
-.method-note {
-  padding: 18px 40px 0;
-  font-size: 12px;
-  color: var(--muted);
-  max-width: 680px;
-  line-height: 1.7;
-}
-
-.method-note span {
-  color: var(--text2);
-  font-weight: 500;
-}
-
 /* ── Methodology collapsible cards ── */
 
 .meth-list {
@@ -501,9 +715,7 @@ td.col-fin {
   transition: border-color 0.15s;
 }
 
-.meth-card:hover {
-  border-color: var(--border2);
-}
+.meth-card:hover { border-color: var(--border2); }
 
 .meth-header {
   width: 100%;
@@ -532,7 +744,6 @@ td.col-fin {
   font-size: 12px;
   font-weight: 700;
   color: var(--text);
-  letter-spacing: -0.1px;
   white-space: nowrap;
 }
 
@@ -563,13 +774,9 @@ td.col-fin {
   transition: grid-template-rows 0.25s ease;
 }
 
-.meth-body.open {
-  grid-template-rows: 1fr;
-}
+.meth-body.open { grid-template-rows: 1fr; }
 
-.meth-inner {
-  overflow: hidden;
-}
+.meth-inner { overflow: hidden; }
 
 .meth-inner-pad {
   padding: 0 18px 18px;
@@ -661,9 +868,7 @@ td.col-fin {
   background: var(--bg2);
 }
 
-.meth-table th:first-child {
-  text-align: left;
-}
+.meth-table th:first-child { text-align: left; }
 
 .meth-table td {
   padding: 6px 10px;
@@ -679,13 +884,8 @@ td.col-fin {
   color: var(--text);
 }
 
-.meth-table tr:last-child td {
-  border-bottom: none;
-}
-
-.meth-table tr:hover td {
-  background: var(--bg2);
-}
+.meth-table tr:last-child td { border-bottom: none; }
+.meth-table tr:hover td { background: var(--bg2); }
 
 .meth-chip {
   font-size: 11px;
@@ -695,20 +895,11 @@ td.col-fin {
   display: inline-block;
 }
 
-.chip-10,
-.chip-9 { background: var(--r5b); color: var(--r5); }
-
-.chip-8,
-.chip-7 { background: var(--r4b); color: var(--r4); }
-
-.chip-6 { background: var(--r3b); color: var(--r3); }
-
-.chip-5,
-.chip-4 { background: var(--r2b); color: var(--r2); }
-
-.chip-3,
-.chip-2,
-.chip-1 { background: var(--r1b); color: var(--r1); }
+.chip-10, .chip-9 { background: var(--r5b); color: var(--r5); }
+.chip-8,  .chip-7 { background: var(--r4b); color: var(--r4); }
+.chip-6           { background: var(--r3b); color: var(--r3); }
+.chip-5, .chip-4  { background: var(--r2b); color: var(--r2); }
+.chip-3, .chip-2, .chip-1 { background: var(--r1b); color: var(--r1); }
 
 .meth-bars {
   display: flex;
@@ -757,14 +948,14 @@ td.col-fin {
 
 @media (max-width: 600px) {
   header,
-  .section-label,
-  .ranking-grid,
+  .ranking-wrap,
   .table-wrap,
   .context-grid,
   .legend,
-  .method-note,
-  .divider,
-  .meth-list {
+  .ctx-legend,
+  .formula-strip,
+  .meth-list,
+  .section-header {
     padding-left: 16px;
     padding-right: 16px;
   }
@@ -786,6 +977,14 @@ td.col-fin {
   }
 
   .meth-desc {
+    display: none;
+  }
+
+  .section-badge {
+    display: none;
+  }
+
+  .formula-note {
     display: none;
   }
 }

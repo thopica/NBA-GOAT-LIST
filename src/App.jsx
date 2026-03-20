@@ -6,6 +6,21 @@ import AchievementTable from './components/AchievementTable';
 import ContextMultipliers from './components/ContextMultipliers';
 import Methodology from './components/Methodology';
 
+function SectionHeader({ num, title, desc, accent, badge }) {
+  return (
+    <div className={`section-header section-header--${accent}`}>
+      <div className="section-header-inner">
+        <div className="section-num">{num}</div>
+        <div className="section-text">
+          <div className="section-title">{title}</div>
+          <div className="section-desc">{desc}</div>
+        </div>
+        {badge && <div className="section-badge">{badge}</div>}
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [players, setPlayers] = useState(INITIAL_PLAYERS);
 
@@ -49,41 +64,49 @@ export default function App() {
     <>
       <Header />
 
-      <div className="section-label">Live Ranking</div>
-      <LiveRanking players={players} />
-
-      <div className="divider" />
-      <div className="section-label">
-        Achievement Metrics{' '}
-        <span style={{ color: 'var(--muted)', fontSize: '9px', letterSpacing: '1px' }}>
-          — click +/− to adjust scores 1–10
-        </span>
-      </div>
-      <AchievementTable players={players} onAdjScore={adjScore} onAdjMult={adjMult} />
-
-      <div className="divider" />
-      <div className="section-label">
-        Context Multipliers{' '}
-        <span style={{ color: 'var(--muted)', fontSize: '9px', letterSpacing: '1px' }}>
-          — same 3 categories applied equally to all players
-        </span>
-      </div>
-      <ContextMultipliers players={players} onAdjCtx={adjCtx} />
-
-      <div className="method-note">
-        <span>Formula:</span> raw score = sum of 9 achievement metrics (each 1–10). Final = raw ×
-        context multiplier. Base multiplier is 1.0 — the three modifiers adjust it up or down
-        equally for every player. <span>Adjust any value to run your own scenario.</span>
+      <SectionHeader
+        num="1"
+        title="Live Ranking"
+        desc="Final scores update in real time as you adjust metrics below."
+        accent="amber"
+        badge="12 players"
+      />
+      <div className="section-body">
+        <LiveRanking players={players} />
       </div>
 
-      <div className="divider" />
-      <div className="section-label">
-        Metric Methodology{' '}
-        <span style={{ color: 'var(--muted)', fontSize: '9px', letterSpacing: '1px' }}>
-          — tap any card to see how the score is calculated
-        </span>
+      <SectionHeader
+        num="2"
+        title="Achievement Metrics"
+        desc="Score each player 1–10 across 9 categories. Click +/− to adjust any value."
+        accent="blue"
+        badge="9 metrics"
+      />
+      <div className="section-body">
+        <AchievementTable players={players} onAdjScore={adjScore} onAdjMult={adjMult} />
       </div>
-      <Methodology />
+
+      <SectionHeader
+        num="3"
+        title="Context Multipliers"
+        desc="Applies a bonus or penalty equally to every player's raw score based on career context."
+        accent="violet"
+        badge="3 factors"
+      />
+      <div className="section-body">
+        <ContextMultipliers players={players} onAdjCtx={adjCtx} />
+      </div>
+
+      <SectionHeader
+        num="4"
+        title="Methodology"
+        desc="How each metric is scored — expand any card to see the formula and raw data."
+        accent="green"
+        badge="1 of 9 complete"
+      />
+      <div className="section-body">
+        <Methodology />
+      </div>
     </>
   );
 }

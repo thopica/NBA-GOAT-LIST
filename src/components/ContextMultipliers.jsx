@@ -1,4 +1,27 @@
-import { multClass } from '../utils/scoring';
+import { multClass, getRaw, getFinal } from '../utils/scoring';
+
+function FormulaStrip({ players }) {
+  const top = [...players].sort((a, b) => getFinal(b) - getFinal(a))[0];
+  return (
+    <div className="formula-strip">
+      <div className="formula-token">
+        <span className="formula-label">Raw Score</span>
+        <span className="formula-value">{getRaw(top)}</span>
+      </div>
+      <span className="formula-op">×</span>
+      <div className="formula-token">
+        <span className="formula-label">Multiplier</span>
+        <span className="formula-value">{top.mult.toFixed(2)}</span>
+      </div>
+      <span className="formula-op">=</span>
+      <div className="formula-token formula-token--result">
+        <span className="formula-label">Final Score</span>
+        <span className="formula-value">{getFinal(top)}</span>
+      </div>
+      <span className="formula-note">Example: {top.name} (ranked #1)</span>
+    </div>
+  );
+}
 
 function ContextCard({ player, playerIndex, onAdjCtx }) {
   const mc = multClass(player.mult);
@@ -40,12 +63,10 @@ const LEGEND_ITEMS = [
 export default function ContextMultipliers({ players, onAdjCtx }) {
   return (
     <>
-      <div style={{ display: 'flex', gap: '20px', padding: '0 40px 14px', flexWrap: 'wrap' }}>
+      <FormulaStrip players={players} />
+      <div className="ctx-legend">
         {LEGEND_ITEMS.map((item) => (
-          <div
-            key={item.text}
-            style={{ fontSize: '11px', color: 'var(--muted)' }}
-          >
+          <div key={item.text} className="ctx-legend-item">
             <span style={{ color: item.color }}>{item.text}</span> {item.suffix}
           </div>
         ))}
