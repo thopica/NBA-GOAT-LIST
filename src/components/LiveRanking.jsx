@@ -1,5 +1,4 @@
 import { getFinal } from '../utils/scoring';
-import { RANK_COLORS } from '../data/constants';
 
 export default function LiveRanking({ players }) {
   const ranked = [...players]
@@ -18,16 +17,11 @@ export default function LiveRanking({ players }) {
             <div className="rank-bar-wrap">
               <div
                 className="rank-bar"
-                style={{
-                  width: `${((r.final / max) * 100).toFixed(1)}%`,
-                  background: RANK_COLORS[i],
-                }}
+                style={{ width: `${((r.final / max) * 100).toFixed(1)}%` }}
               />
             </div>
           </div>
-          <div className="rank-score" style={{ color: RANK_COLORS[i] }}>
-            {r.final}
-          </div>
+          <div className="rank-score">{r.final}</div>
         </div>
       ))}
     </div>
