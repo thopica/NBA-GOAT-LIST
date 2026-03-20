@@ -11,8 +11,8 @@ function ContextCard({ player, playerIndex, onAdjCtx }) {
       </div>
       {player.ctx.map((c, ci) => {
         const isPos = c.v >= 0;
-        const color = isPos ? '#4ade80' : '#f87171';
-        const background = isPos ? 'rgba(74,222,128,0.12)' : 'rgba(248,113,113,0.12)';
+        const color = isPos ? '#15803d' : '#dc2626';
+        const background = isPos ? '#f0fdf4' : '#fef2f2';
         return (
           <div key={c.label} className="ctx-row">
             <span className="ctx-label">{c.label}</span>
@@ -31,10 +31,10 @@ function ContextCard({ player, playerIndex, onAdjCtx }) {
 }
 
 const LEGEND_ITEMS = [
-  { color: '#4ade80', text: 'Loyalty +', suffix: '= stayed / never requested exit' },
-  { color: '#f87171', text: 'Loyalty −', suffix: '= player-requested departure' },
-  { color: '#f87171', text: 'Help −',    suffix: '= elite co-stars inflated rings' },
-  { color: '#f87171', text: 'Era −',     suffix: '= fewer top-50 rivals to beat' },
+  { color: '#15803d', text: 'Loyalty +', suffix: '= stayed / never requested exit' },
+  { color: '#dc2626', text: 'Loyalty −', suffix: '= player-requested departure' },
+  { color: '#dc2626', text: 'Help −',    suffix: '= elite co-stars inflated rings' },
+  { color: '#dc2626', text: 'Era −',     suffix: '= fewer top-50 rivals to beat' },
 ];
 
 export default function ContextMultipliers({ players, onAdjCtx }) {
@@ -44,7 +44,7 @@ export default function ContextMultipliers({ players, onAdjCtx }) {
         {LEGEND_ITEMS.map((item) => (
           <div
             key={item.text}
-            style={{ fontSize: '11px', color: 'var(--muted)', fontFamily: "'DM Mono',monospace" }}
+            style={{ fontSize: '11px', color: 'var(--muted)' }}
           >
             <span style={{ color: item.color }}>{item.text}</span> {item.suffix}
           </div>
